@@ -9,6 +9,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from routers.sms import sms
 from routers.auth import auth
 from routers.client import client
+import uvicorn
 
 app = FastAPI(
     version="4.0",
@@ -66,3 +67,6 @@ async def root():
 @app.get("/version")
 async def version():
     return {"version": app.version}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

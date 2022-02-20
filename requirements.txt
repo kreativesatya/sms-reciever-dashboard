@@ -2,3 +2,4 @@ fastapi
 fastapi-jwt-auth
 pydantic
 pymongo[srv]
+uvicorn

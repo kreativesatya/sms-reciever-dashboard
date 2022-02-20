@@ -33,10 +33,8 @@ async def get_clients(Authorize: AuthJWT = Depends()):
 @router.post("/add")
 async def add_client(client: client):
     data = jsonable_encoder(client)
-    if get_db.CLIENT.find_one(data) is None:
+    if get_db.CLIENT.find_one({"client_id": data["client_id"], "device_name": data["device_name"]}) is None:
         get_db.CLIENT.insert_one(data)
-        return JSONResponse(status_code=200, content={"message": "success"})
-    return JSONResponse(status_code=401, content={"message": "client already exists"})
-    
-    get_db.CLIENT.insert_one(jsonable_encoder(client))
-    return JSONResponse(status_code=200, content={"message": "Client added"})
+        return JSONResponse(status_code=200, content={"message": "Client added"})
+    return JSONResponse(status_code=200, content={"message": "client already exists"})
+
